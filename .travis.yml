@@ -1,11 +1,16 @@
 language: node_js
+
 services:
   - couchdb
+
 node_js:
   - "0.11"
   - "0.10"
   - "0.8"
   - "0.6"
+
+before_script:
+  - npm install -g grunt-cli
 
 after_success:
   - cat coverage.lcov | ./node_modules/coveralls/bin/coveralls.js
