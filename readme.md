@@ -26,6 +26,10 @@ To restore a remote based on a local backup, use `restore`:
 
 The `-d` argument indicates a backup made on a certain day.
 
+To destroy a local backup of a certain day, use `remove`:
+
+    spare remove -m <remote> -d <YYYY-MM-DD>
+
 ## Testing
 
     npm test
