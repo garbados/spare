@@ -15,11 +15,8 @@ module.exports = function(grunt) {
     },
     mochaTest: {
       test: {
-        options: {
-          reporter: 'mocha-lcov-reporter',
-          captureFile: 'coverage.lcov'
-        },
-        src: ['tests/**/*.js']
+        options: {},
+        src: ['test/**/*.js']
       }
     }
   });

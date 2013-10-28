@@ -142,4 +142,4 @@ describe('Spare', function (){
   describe('watch', function () {
 
   });
-})
+});
