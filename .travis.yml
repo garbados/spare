@@ -8,7 +8,7 @@ node_js:
   - "0.8"
 
 before_script:
-  - npm install -g grunt-cli mocha
+  - npm install -g grunt-cli mocha mocha-lcov-reporter
 
 after_success:
   - mocha -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
