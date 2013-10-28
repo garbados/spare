@@ -11,4 +11,8 @@ before_script:
   - npm install -g grunt-cli mocha mocha-lcov-reporter
 
 after_success:
+  - mv lib lib-orig
+  - jscoverage lib-orig lib
   - mocha -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
+  - mv lib lib-cov
+  - mv lib-orig lib
