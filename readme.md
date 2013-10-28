@@ -1,4 +1,4 @@
-# Spare
+# Spare [![Build Status](https://travis-ci.org/garbados/spare.png)](https://travis-ci.org/garbados/spare) [![Coverage Status](https://coveralls.io/repos/garbados/spare/badge.png)](https://coveralls.io/r/garbados/spare)
 
 Creates a cronjob that takes periodic snapshots of a remote Cloudant / CouchDB instance, using PouchDB.
 

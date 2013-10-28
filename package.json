@@ -31,6 +31,8 @@
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.7.0",
     "matchdep": "~0.3.0",
-    "grunt-mocha-test": "~0.7.0"
+    "grunt-mocha-test": "~0.7.0",
+    "coveralls": "~2.3.0",
+    "mocha-lcov-reporter": "0.0.1"
   }
 }

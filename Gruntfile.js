@@ -16,7 +16,8 @@ module.exports = function(grunt) {
     mochaTest: {
       test: {
         options: {
-          reporter: 'spec',
+          reporter: 'mocha-lcov-reporter',
+          captureFile: 'coverage.lcov'
         },
         src: ['tests/**/*.js']
       }
