@@ -21,6 +21,43 @@ program
     });
   });
 
+program
+  .command('watch')
+  .description('Create a cronjob to backup the given remote every day.')
+  .action(function () {
+    var watch = require('../lib/watch');
+    watch(program.remote, function (err) {
+      if (err) throw err;
+      console.log('Cronjob successfully created.');
+    });
+  });
+
+program
+  .command('restore')
+  .description('Restore a remote from a backup.')
+  .action(function () {
+    var restore = require('../lib/restore');
+    restore(program.remote, program.date, function (err, res) {
+      if (err) throw err;
+      console.log('Restore complete! Wrote', res.docs_written, 'documents.');
+    });
+  });
+
+program
+  .command('remove')
+  .description('Delete a remote\'s backup of a particular day')
+  .action(function () {
+    var remove = require('../lib/remove');
+    remove(program.remote, program.date, function (err, res) {
+      if (err) {
+        if (err.status === 404) console.log('DB not found, did not delete.');
+        else throw err;
+      } else {
+        console.log('Removal complete!'); 
+      }
+    });
+  });
+
 // start!
 program
   .parse(process.argv);

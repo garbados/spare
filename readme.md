@@ -22,7 +22,9 @@ To do a one-off backup of a remote instance, use `backup` instead:
 
 To restore a remote based on a local backup, use `restore`:
 
-    spare restore -m <remote> -i <YYYY-MM-DD>
+    spare restore -m <remote> -d <YYYY-MM-DD>
+
+The `-d` argument indicates a backup made on a certain day.
 
 ## Testing
 
