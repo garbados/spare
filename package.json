@@ -1,0 +1,36 @@
+{
+  "name": "spare",
+  "version": "0.0.0",
+  "description": "Backup a Cloudant / CouchDB instance, using PouchDB.",
+  "main": "app.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/garbados/spare"
+  },
+  "keywords": [
+    "backup",
+    "couchdb",
+    "cloudant",
+    "pouchdb"
+  ],
+  "author": "Max Thayer <garbados@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/garbados/spare/issues"
+  },
+  "dependencies": {
+    "crontab": "~0.3.4",
+    "pouchdb": "0.0.14",
+    "commander": "~2.0.0",
+    "cron": "~1.0.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.7.0",
+    "matchdep": "~0.3.0",
+    "grunt-mocha-test": "~0.7.0"
+  }
+}
