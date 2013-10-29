@@ -10,25 +10,27 @@ If that doesn't work, try prepending `sudo`.
 
 ## Usage
 
-Spare exposes a CLI that you use to create and manage cronjobs appropriately, taking commands in this format:
-
-    spare watch -m <remote>
-
-Then, every day at midnight, Spare will replicate the remote instance's contents to a local LevelDB.
-
 To do a one-off backup of a remote instance, use `backup` instead:
 
-    spare backup -m <remote>
+    spare backup -r <remote>
 
 To restore a remote based on a local backup, use `restore`:
 
-    spare restore -m <remote> -d <YYYY-MM-DD>
+    spare restore -r <remote> -d <YYYY-MM-DD>
 
 The `-d` argument indicates a backup made on a certain day.
 
 To destroy a local backup of a certain day, use `remove`:
 
-    spare remove -m <remote> -d <YYYY-MM-DD>
+    spare remove -r <remote> -d <YYYY-MM-DD>
+
+To run any of these commands on a regular basis, try adding them to your [crontab](http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab+5), like so:
+
+    crontab -e
+    # now, in your text editor, add a command like this:
+    @daily spare backup -r <remote>
+
+That will backup the given remote instance every day at midnight.
 
 ## Testing
 
