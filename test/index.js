@@ -53,14 +53,25 @@ describe('Spare', function (){
       async.parallel([
         function (done) { request.del(FIXTURES.remote, done); },
         function (done) { request.del(FIXTURES.other_remote, done); },
-        function (done) { remove(FIXTURES.remote, FIXTURES.date(), done); }
+        function (done) { remove(FIXTURES.remote, null, FIXTURES.date(), function (err, res) {
+          if (err) {
+            if (err.status === 404) {
+              done();
+            } else {
+              console.log(err);
+              throw err;
+            }
+          } else {
+            done();
+          }
+        }); }
       ], done);
     });
 
     it('should copy all remote docs to the local store', function (done) {
       async.series([
         function (done) {
-          backup(FIXTURES.remote, function (err, res) {
+          backup(FIXTURES.remote, null, function (err, res) {
             if (err) {
               done(err);
             } else {
@@ -69,7 +80,7 @@ describe('Spare', function (){
           });
         },
         function (done) {
-          request(FIXTURES.remote, function (err, res, body) {
+          request(FIXTURES.remote, null, function (err, res, body) {
             if (err) {
               done(err);
             } else {
@@ -92,7 +103,7 @@ describe('Spare', function (){
     it('should restore a local backup to a remote instance', function (done) {
       async.series([
         function (done) {
-          backup(FIXTURES.remote, function (err, res) {
+          backup(FIXTURES.remote, null, function (err, res) {
             if (err) {
               done(err);
             } else {
@@ -104,7 +115,7 @@ describe('Spare', function (){
           request.del(FIXTURES.remote, done);
         },
         function (done) {
-          restore(FIXTURES.remote, FIXTURES.date(), function (err, res) {
+          restore(FIXTURES.remote, null, FIXTURES.date(), function (err, res) {
             if (err) {
               done(err);
             } else {
@@ -132,14 +143,37 @@ describe('Spare', function (){
         }
       });
     });
-  });
-  describe('restore', function () {
 
-  });
-  describe('remove', function () {
-
-  });
-  describe('watch', function () {
-
+    it('should backup remote to a given target', function (done) {
+      this.timeout(3000);
+      async.series([
+        function (done) {
+          backup(FIXTURES.remote, FIXTURES.other_remote, function (err, res) {
+            if (err) {
+              done(err);
+            } else {
+              done(null, res.docs_written); 
+            }
+          }); 
+        },
+        function (done) {
+          request(FIXTURES.other_remote, function (err, res, body) {
+            if (err) {
+              done(err);
+            } else {
+              body = JSON.parse(body);
+              done(null, body.doc_count);
+            }
+          });
+        },
+      ], function (err, results) {
+        if (err) {
+          done(err);
+        } else {
+          assert.ok(results[0] === results[1]);
+          done(); 
+        }
+      });
+    });
   });
 });
