@@ -22,17 +22,6 @@ program
   });
 
 program
-  .command('watch')
-  .description('Create a cronjob to backup the given remote every day.')
-  .action(function () {
-    var watch = require('../lib/watch');
-    watch(program.remote, function (err) {
-      if (err) throw err;
-      console.log('Cronjob successfully created.');
-    });
-  });
-
-program
   .command('restore')
   .description('Restore a remote from a backup.')
   .action(function () {

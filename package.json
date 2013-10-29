@@ -6,6 +6,9 @@
   "scripts": {
     "test": "grunt"
   },
+  "bin": {
+    "spare": "./bin/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/garbados/spare"
@@ -22,17 +25,14 @@
     "url": "https://github.com/garbados/spare/issues"
   },
   "dependencies": {
-    "crontab": "~0.3.4",
     "pouchdb": "0.0.14",
-    "commander": "~2.0.0",
-    "cron": "~1.0.1"
+    "commander": "~2.0.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.7.0",
     "matchdep": "~0.3.0",
     "grunt-mocha-test": "~0.7.0",
-    "coveralls": "~2.3.0",
     "request": "~2.27.0",
     "async": "~0.2.9"
   }
