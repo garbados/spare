@@ -1,6 +1,6 @@
 {
   "name": "spare",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Backup a Cloudant / CouchDB instance, using PouchDB.",
   "main": "app.js",
   "scripts": {
