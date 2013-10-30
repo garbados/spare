@@ -3,7 +3,8 @@ var assert = require('assert'),
     async = require('async'),
     backup = require('../lib/backup'),
     restore = require('../lib/restore'),
-    remove = require('../lib/remove');
+    remove = require('../lib/remove'),
+    watch = require('../lib/watch');
 
 var FIXTURES = {
   remote: 'http://localhost:5984/sparetest',
@@ -149,6 +150,37 @@ describe('Spare', function (){
       async.series([
         function (done) {
           backup(FIXTURES.remote, FIXTURES.other_remote, function (err, res) {
+            if (err) {
+              done(err);
+            } else {
+              done(null, res.docs_written); 
+            }
+          }); 
+        },
+        function (done) {
+          request(FIXTURES.other_remote, function (err, res, body) {
+            if (err) {
+              done(err);
+            } else {
+              body = JSON.parse(body);
+              done(null, body.doc_count);
+            }
+          });
+        },
+      ], function (err, results) {
+        if (err) {
+          done(err);
+        } else {
+          assert.ok(results[0] === results[1]);
+          done(); 
+        }
+      });
+    });
+
+    it('should watch a given remote', function (done) {
+      async.series([
+        function (done) {
+          watch(FIXTURES.remote, FIXTURES.other_remote)(function (err, res) {
             if (err) {
               done(err);
             } else {

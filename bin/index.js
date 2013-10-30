@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 var pkg = require('../package.json'),
-    program = require('commander');
+    program = require('commander'),
+    forever = require('forever-monitor'),
+    path = require('path');
 
 program
   .version(pkg.version)
@@ -45,6 +47,23 @@ program
       } else {
         console.log('Removal complete!'); 
       }
+    });
+  });
+
+program
+  .command('watch')
+  .description('Watch a remote instance, creating daily snapshots.')
+  .action(function () {
+    console.log('Begin watching...');
+    forever.start([
+      process.execPath,
+      path.resolve(__dirname, './watch.js'),
+      program.remote,
+      program.target
+    ], {
+      max: Infinity,
+      spinSleepTime: 60000,
+      minUptime: 1000
     });
   });
 
