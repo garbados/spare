@@ -36,7 +36,7 @@ To run any of these commands on a regular basis, try adding them to your [cronta
 
     crontab -e
     # now, in your text editor, add a command like this:
-    @reboot spare watch -r <remote>
+    @daily spare watch -r <remote>
 
 That will backup the given remote instance every day at midnight.
 
